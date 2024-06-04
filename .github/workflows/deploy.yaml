@@ -44,17 +44,16 @@ jobs:
         run: npm run build
         
       - name: Create dist directory
-        run: mkdir -p dist/Kaboom-Portfolio
+        run: mkdir -p dist/${{ github.repository }}
 
-      - name: Add CNAME
-        run: echo "www.zheng.coffee" > ./dist/Kaboom-Portfolio/CNAME
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload dist folder
-          path: './dist/Kaboom-Portfolio'
+      - name: Move build output to dist
+        run: mv build/* dist/${{ github.repository }}/
+
+      - name: Add CNAME file for custom domain
+        run: echo 'www.zheng.coffee' > dist/${{ github.repository }}/CNAME
+
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/${{ github.repository }}
