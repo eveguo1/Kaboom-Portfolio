@@ -44,16 +44,13 @@ jobs:
         run: npm run build
         
       - name: Create dist directory
-        run: mkdir -p dist/${{ github.repository }}
-
-      - name: Move build output to dist
-        run: mv build/* dist/${{ github.repository }}/
-
+        run: mkdir -p ./dist/${{ github.repository }}
+        
       - name: Add CNAME file for custom domain
-        run: echo 'www.zheng.coffee' > dist/${{ github.repository }}/CNAME
+        run: echo 'www.zheng.coffee' > ./dist/${{ github.repository }}/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/${{ github.repository }}
+          publish_dir: ./dist/${{ github.repository }}
