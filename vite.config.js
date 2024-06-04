@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    base: "/Kaboom-Portfolio/",
+    base: "/",
     build: {
         // npm -D install terser
         minify: "terser"
