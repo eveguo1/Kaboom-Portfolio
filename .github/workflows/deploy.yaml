@@ -42,6 +42,10 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        
+      - name: Create dist directory
+        run: mkdir -p dist/Kaboom-Portfolio
+
       - name: Add CNAME
         run: echo "www.zheng.coffee" > ./dist/Kaboom-Portfolio/CNAME
       - name: Setup Pages
